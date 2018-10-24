@@ -37,6 +37,7 @@
     (assert-equal #*0110 (bit-xor #*1100 #*1010)))
 
 
+;; TODO its possible to pass test by returning constant, submit patch?
 (defun list-to-bit-vector (my-list)
   (make-array (length my-list) :element-type 'bit :initial-contents my-list))
 
