@@ -50,8 +50,23 @@
 ; Your goal is to write the score method.
 
 (defun score (dice)
-  ; You need to write this method
-)
+  (let ((points 0)
+        (counts (make-hash-table)))
+    (loop for i from 1 to 6
+       do (setf (gethash i counts) 0))
+    (loop for number in dice
+       do (incf (gethash number counts)))
+    (loop for i being the hash-keys in counts
+       using (hash-value count)
+       do (if (>= count 3)
+              (case i
+                (5 (incf points (+ 500 (* (- count 3) 50))))
+                (1 (incf points (+ 1000 (* (- count 3) 100))))
+                (t (incf points (* i 100))))
+              (case i
+                (5 (incf points (* 50 count)))
+                (1 (incf points (* 100 count))))))
+    points))
 
 (define-test test-score-of-an-empty-list-is-zero
     (assert-equal 0 (score nil)))

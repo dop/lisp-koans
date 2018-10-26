@@ -133,7 +133,7 @@
 
 
 (define-test test-destructuring-bind
-    (let* ((count 0)
+  (let* ((count 0)
            (result (loop for (a b) in '((1 9) (2 8) (3 7) (4 6))
                       do (incf count)
                       collect (+ a b))))
